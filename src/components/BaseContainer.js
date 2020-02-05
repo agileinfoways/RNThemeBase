@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, StatusBar, Platform } from 'react-native';
+import { View, Text, SafeAreaView, StatusBar, Platform, Dimensions } from 'react-native';
 import ToolBar from './ToolBar';
 
-import { withTheme } from '../core/themeProvider';
+const { height, width } = Dimensions.get('window');
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+export const isIPhoneX = () => Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS
+    ? width === X_WIDTH && height === X_HEIGHT || width === XSMAX_WIDTH && height === XSMAX_HEIGHT
+    : false;
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ?
+    isIPhoneX ? 45 :
+        20 : StatusBar.currentHeight;
 
 BaseContainer = (props) => {
     return (
